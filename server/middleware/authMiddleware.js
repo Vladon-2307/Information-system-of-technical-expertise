@@ -13,7 +13,6 @@ module.exports = function (role) {
             }
             const decoded = jwt.verify(token, process.env.JWT_KEY)
             if (decoded.role !== role && role !== "ALL") {
-                console.log(role, decoded.role)
                 return next(ApiError.forbidden())
             }
             req.user = decoded
