@@ -12,7 +12,8 @@ module.exports = function (role) {
                 res.status(401).json({message: 'Не авторизован'})
             }
             const decoded = jwt.verify(token, process.env.JWT_KEY)
-            if (decoded.role !== role && role !== "ALL" && role !== "ADMIN") {
+            if (decoded.role !== role && role !== "ALL") {
+                console.log(role, decoded.role)
                 return next(ApiError.forbidden())
             }
             req.user = decoded
